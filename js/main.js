@@ -74,12 +74,12 @@ let randomize = () => {
   }
   firstNumber = Math.round(Math.random() * topNum);
   secondNumber = Math.round(Math.random() * 10);
-  if (!action && firstNumber < secondNumber) {
-    firstNumber += secondNumber;
-    secondNumber = firstNumber - secondNumber;
+  if ((!action && firstNumber < secondNumber) || (params['2'] && firstNumber + secondNumber > 10)) {
+    randomize();
+  } else {
+    $('#firstNumber').text('' + firstNumber);
+    $('#secondNumber').text('' + secondNumber);
   }
-  $('#firstNumber').text('' + firstNumber);
-  $('#secondNumber').text('' + secondNumber);
 };
 randomize();
 
