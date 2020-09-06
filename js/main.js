@@ -1,4 +1,24 @@
-const successImageUrls = [
+/**
+ * Get the URL parameters
+ * source: https://css-tricks.com/snippets/javascript/get-url-variables/
+ * @param  {String} url The URL
+ * @return {Object}     The URL parameters
+ */
+var getParams = function (url) {
+  var params = {};
+  var parser = document.createElement('a');
+  parser.href = url;
+  var query = parser.search.substring(1);
+  var vars = query.split('&');
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split('=');
+    params[pair[0]] = decodeURIComponent(pair[1]);
+  }
+  return params;
+};
+const params = getParams(window.location.href);
+console.log(params);
+let successImageUrls = [
   "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F550276%2Funicorn-wearing-i-love-unicorns-sweater-standing-in-front-of-a-rainbow.jpg&w=700&op=resize",
   "https://www.partyrama.co.uk/wp-content/uploads/2018/05/rainbow-unicorn-163cm-lifesize-cardboard-cutout-product-image.jpg",
   "https://image.freepik.com/free-vector/unicorn_23-2148174709.jpg",
@@ -20,6 +40,27 @@ const successImageUrls = [
   "https://media.customon.com/unsafe/600x600/img.customon.com//design/600/600/ffffff/65038/a29315ef4180983623df7f45ffcbe6cf.png.jpg",
   "https://ecdn.teacherspayteachers.com/thumbitem/Cute-unicorn-clipart-4455469-1552974777/original-4455469-1.jpg"
 ];
+if (params["2"]) {
+  successImageUrls = [
+    "https://www.timrylands.com/wp-content/uploads/2020/03/Beyblade-Characters.jpg",
+    "https://i.pinimg.com/originals/75/4a/fd/754afd43197107b67ec5c409b5bf06df.jpg",
+    "https://i.pinimg.com/originals/d4/2d/de/d42ddedf8a896ec32a047239588289e4.jpg",
+    "https://photos1.blogger.com/blogger/6198/2250/1600/kaiPDVD_003.jpg",
+    "https://m.media-amazon.com/images/M/MV5BNGIzNDViMjAtYzYwZS00MzJlLTkyZTUtYzZlOWFkYmEyMTdlXkEyXkFqcGdeQXVyNjk1Njg5NTA@._V1_UY1200_CR93,0,630,1200_AL_.jpg",
+    "https://w7.pngwing.com/pngs/849/720/png-transparent-ray-kon-kai-hiwatari-tyson-beyblade-metal-fusion-others-black-hair-cartoon-fictional-character.png",
+    "https://i.pinimg.com/originals/16/ae/ec/16aeec16629cabe6728a06b84a523a32.jpg",
+    "https://vignette.wikia.nocookie.net/beyblade/images/3/31/RAY_KON_2000_PROMO.png/revision/latest?cb=20160411033253",
+    "https://vignette.wikia.nocookie.net/p__/images/7/77/Kai_Hiwatari_BB.jpg/revision/latest?cb=20180514004559&path-prefix=protagonist",
+    "https://wallpapercave.com/wp/XD1DTMx.jpg",
+    "https://e7.pngegg.com/pngimages/927/797/png-clipart-beyblade-shogun-steel-anime-character-drawing-holi-manga-computer-wallpaper.png",
+    "https://pm1.narvii.com/6437/6e6212074bea5a8eb5ef191d8a8f4733269284a9_hq.jpg",
+    "https://i.pinimg.com/originals/89/10/e8/8910e857004e12453677c77e67f41420.jpg"
+  ];
+}
+let topNum = 20;
+if (params['2']) {
+  topNum = 10;
+}
 const failImageUrl = "";
 let firstNumber;
 let secondNumber;
@@ -31,7 +72,7 @@ let randomize = () => {
   } else {
     $('#action').text('-');
   }
-  firstNumber = Math.round(Math.random() * 20);
+  firstNumber = Math.round(Math.random() * topNum);
   secondNumber = Math.round(Math.random() * 10);
   if (!action && firstNumber < secondNumber) {
     firstNumber += secondNumber;
