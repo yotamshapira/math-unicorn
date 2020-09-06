@@ -66,7 +66,7 @@ let firstNumber;
 let secondNumber;
 let action;
 let randomize = () => {
-  action = Math.round(Math.random()) !== 0;
+  action = params['2'] ? true : Math.round(Math.random()) !== 0;
   if (action) {
     $('#action').text('+');
   } else {
